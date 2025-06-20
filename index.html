@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABM Magic Tools by Amar</title>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000"
+     crossorigin="anonymous"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; text-align: center; padding: 20px; }
+    h1 { color: #333; }
+    textarea { width: 90%; max-width: 500px; height: 100px; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer; }
+    video { margin-top: 20px; width: 100%; max-width: 500px; display: none; }
+    #loading { margin-top: 20px; display: none; color: green; }
+    .adsense-box { margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <h1>🎬 ABM Magic Tools by Amar</h1>
+  <p>अपनी कहानी नीचे लिखें और Cartoon वीडियो पाएं:</p>
+  <textarea id="story" placeholder="उदाहरण: a cartoon boy flying over a magical city..."></textarea><br/>
+  <button onclick="generateVideo()">🎥 Generate Cartoon Video</button>
+  <p id="loading">⏳ वीडियो बनाया जा रहा है, कृपया प्रतीक्षा करें...</p>
+  <video id="outputVideo" controls autoplay loop></video>
+
+  <div class="adsense-box">
+    <!-- Google AdSense Block -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-0000000000000000"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <script>
+    async function generateVideo() {
+      const story = document.getElementById("story").value.trim();
+      if (!story) {
+        alert("कृपया पहले कोई कहानी लिखें!");
+        return;
+      }
+
+      document.getElementById("loading").style.display = "block";
+      const video = document.getElementById("outputVideo");
+      video.style.display = "none";
+      video.src = "";
+
+      try {
+        const apiUrl = "https://api.pollinations.ai/prompt/" + encodeURIComponent(story);
+        const response = await fetch(apiUrl);
+        const finalUrl = response.url;
+
+        document.getElementById("loading").style.display = "none";
+        video.src = finalUrl;
+        video.style.display = "block";
+      } catch (error) {
+        document.getElementById("loading").style.display = "none";
+        alert("वीडियो जनरेट करने में त्रुटि हुई। कृपया दोबारा प्रयास करें।");
+      }
+    }
+  </script>
+
+  <p style="margin-top: 40px;">© 2025 ABM Magic Tools by Amar</p>
+</body>
+</html>
